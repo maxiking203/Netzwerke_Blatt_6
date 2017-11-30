@@ -17,13 +17,10 @@ public class Server {
 
 			byte[] buffer = new byte[1400];
 			DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
-			int n = 0;
-		while(n <= 1000) {
+			for(int n = 1; n <= 1000; n++) {
 			try {
-				n++;
 			datagramSocket.receive(packet);
-			System.out.println("Package erhalten");
-			System.out.println("Sended package with the number:" + n);
+			System.out.println("got package:" + n);
 			}
             catch (SocketTimeoutException e) {
                 // timeout exception.
