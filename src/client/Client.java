@@ -13,11 +13,15 @@ public class Client {
 			
 
 		byte[] buffer = new byte[1400];
-		InetAddress receiverAddress = InetAddress.getByName("Hier IP ADRESSE setzten");
+		InetAddress receiverAddress = InetAddress.getByName("10.179.15.132");
 
 		DatagramPacket packet = new DatagramPacket(
 		        buffer, buffer.length, receiverAddress, 80);
-		datagramSocket.send(packet);
+		int n = 0;
+		while (n < 1000) {
+			datagramSocket.send(packet);
+			n++;
+		}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
