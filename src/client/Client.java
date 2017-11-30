@@ -13,12 +13,12 @@ public class Client {
 			
 
 		byte[] buffer = new byte[1400];
-		InetAddress receiverAddress = InetAddress.getByName("10.179.15.132");
+		InetAddress receiverAddress = InetAddress.getByName("10.179.1.9");
 
 		DatagramPacket packet = new DatagramPacket(
 		        buffer, buffer.length, receiverAddress, 80);
 		int n = 1;
-		while (n < 1000) {
+		while (n <= 1000) {
 			datagramSocket.send(packet);
 			System.out.println("Sended package with the number:" + n);
 			
