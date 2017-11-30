@@ -17,12 +17,20 @@ public class Client {
 
 		DatagramPacket packet = new DatagramPacket(
 		        buffer, buffer.length, receiverAddress, 80);
-		int n = 0;
+		int n = 1;
 		while (n < 1000) {
 			datagramSocket.send(packet);
+			System.out.println("Sended package with the number:" + n);
+			
+			if(n % 10 == 0) {
+				Thread.sleep(1000);
+			}
 			n++;
 		}
 		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
