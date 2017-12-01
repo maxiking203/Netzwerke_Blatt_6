@@ -6,6 +6,7 @@ import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.SocketException;
 import java.net.SocketTimeoutException;
+import java.util.Date;
 
 public class Server {
 	
@@ -15,7 +16,7 @@ public class Server {
 	public static void main(String[] args) {
 		int packageC = 0;
 		int failuers = 0;
-		
+		long starttime = new Date().getTime();
 		try (DatagramSocket datagramSocket = new DatagramSocket(80);) {
 			datagramSocket.setSoTimeout(1000);
 
@@ -35,6 +36,9 @@ public class Server {
                 
             }
 		}
+		long endtime = new Date().getTime();
+		long rate = (((1400*N)*8)/1000)/((endtime - starttime)/1000);
+		System.out.println("Empfangsraterate: " + rate);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

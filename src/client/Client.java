@@ -33,6 +33,7 @@ public class Client {
 		}
 		long endtime = new Date().getTime();
 		long rate = (((1400*N)*8)/1000)/((endtime - starttime)/1000);
+		System.out.println("Senderate: " + rate);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -40,5 +41,6 @@ public class Client {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
 	}
 }
