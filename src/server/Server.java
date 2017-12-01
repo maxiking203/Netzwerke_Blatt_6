@@ -18,7 +18,7 @@ public class Server {
 		int failuers = 0;
 		long starttime = new Date().getTime();
 		try (DatagramSocket datagramSocket = new DatagramSocket(80);) {
-			datagramSocket.setSoTimeout(1000);
+			datagramSocket.setSoTimeout(5000);
 
 			byte[] buffer = new byte[1400];
 			DatagramPacket packet = new DatagramPacket(buffer, buffer.length);

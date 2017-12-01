@@ -8,7 +8,7 @@ import java.util.Date;
 
 public class Client {
 	
-	private final static int N = 1000;
+	private final static int N = 100;
 
 	
 	public static void main(String[] args) {
@@ -16,7 +16,7 @@ public class Client {
 			
 
 		byte[] buffer = new byte[1400];
-		InetAddress receiverAddress = InetAddress.getByName("192.168.2.179");
+		InetAddress receiverAddress = InetAddress.getByName("87.159.59.105");
 
 		DatagramPacket packet = new DatagramPacket(
 		        buffer, buffer.length, receiverAddress, 80);
@@ -28,6 +28,7 @@ public class Client {
 			
 			if(n % 10 == 0) {
 				Thread.sleep(500);
+				System.out.println("verzögert");
 			}
 			n++;
 		}
