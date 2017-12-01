@@ -9,6 +9,8 @@ import java.net.SocketTimeoutException;
 
 public class Server {
 	
+	private final static int N = 1000;
+	
 	@SuppressWarnings("resource")
 	public static void main(String[] args) {
 		int packageC = 0;
@@ -20,7 +22,7 @@ public class Server {
 			byte[] buffer = new byte[1400];
 			DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
 
-			for(int n = 1; n <= 10000; n++) {
+			for(int n = 1; n <= N; n++) {
 			try {
 			datagramSocket.receive(packet);
 			packageC++;
