@@ -11,7 +11,7 @@ public class Server {
 	
 	@SuppressWarnings("resource")
 	public static void main(String[] args) {
-		int packageC = 1;
+		int packageC = 0;
 		int failuers = 0;
 		
 		try (DatagramSocket datagramSocket = new DatagramSocket(80);) {
@@ -23,8 +23,8 @@ public class Server {
 			for(int n = 1; n <= 10000; n++) {
 			try {
 			datagramSocket.receive(packet);
-			System.out.println("got package:" + packageC);
 			packageC++;
+			System.out.println("got package:" + packageC);
 			}
             catch (SocketTimeoutException e) {
                 // timeout exception.

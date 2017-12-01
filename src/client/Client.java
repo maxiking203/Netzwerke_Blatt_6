@@ -23,7 +23,7 @@ public class Client {
 			System.out.println("Sended package with the number:" + n);
 			
 			if(n % 10 == 0) {
-				Thread.sleep(100);
+				Thread.sleep(500);
 			}
 			n++;
 		}
