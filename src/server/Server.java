@@ -13,11 +13,11 @@ public class Server {
 	public static void main(String[] args) {
 		
 		try (DatagramSocket datagramSocket = new DatagramSocket(80);) {
-			datagramSocket.setSoTimeout(5000);
+			datagramSocket.setSoTimeout(1000);
 
 			byte[] buffer = new byte[1400];
 			DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
-			for(int n = 1; n <= 1000; n++) {
+			for(int n = 1; n <= 30000; n++) {
 			try {
 			datagramSocket.receive(packet);
 			System.out.println("got package:" + n);
