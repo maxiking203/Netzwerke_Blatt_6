@@ -18,12 +18,12 @@ public class Client {
 		DatagramPacket packet = new DatagramPacket(
 		        buffer, buffer.length, receiverAddress, 80);
 		int n = 1;
-		while (n <= 30000) {
+		while (n <= 10000) {
 			datagramSocket.send(packet);
 			System.out.println("Sended package with the number:" + n);
 			
 			if(n % 10 == 0) {
-				Thread.sleep(1000);
+				Thread.sleep(100);
 			}
 			n++;
 		}
