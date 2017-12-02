@@ -12,7 +12,7 @@ import java.util.Date;
 public class Client {
 	
 	private final static int PORT = 8080;
-	private final static int N = 1055;
+	private final static int N = 2055;
 	private final static byte[] BUFFER = new byte[1400];
 	private static InetAddress receiverAddress;
 	private static long starttime;
@@ -39,14 +39,15 @@ public class Client {
 			datagramSocket.send(packet);
 			System.out.println("Sended package with the number:" + n);
 			
-			if(n % 10 == 0) {
-				Thread.sleep(500);
+			if(n % 150 == 0) {
+				Thread.sleep(100);
 				System.out.println("verzögert");
 			}
 			n++;
 		}
 		endtime = new Date().getTime();
 		calculate(starttime, endtime);
+		datagramSocket.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -66,8 +67,8 @@ public class Client {
 				dOut.write(BUFFER); 
 				System.out.println("Sended package with the number:" + n);
 				
-				if(n % 10 == 0) {
-					Thread.sleep(500);
+				if(n % 200 == 0) {
+					Thread.sleep(1000);
 					System.out.println("verzögert");
 				}
 				n++;
