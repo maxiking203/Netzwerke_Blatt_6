@@ -22,40 +22,40 @@ public class Client {
 		
 		
 		try {
-			receiverAddress = InetAddress.getByName("169.254.217.4");
+			receiverAddress = InetAddress.getByName("localhost");
 			System.out.println("SERVER IP SET");
 		} catch (UnknownHostException e1) {
 			System.out.println("Wrong Host!");
 			e1.printStackTrace();
 		}
 		
-//		System.out.println("//******UDP*****//");
-//		try(DatagramSocket datagramSocket = new DatagramSocket();) {
-//		DatagramPacket packet = new DatagramPacket(
-//		        BUFFER, BUFFER.length, receiverAddress, PORT);
-//		int n = 1;
-//		starttime = new Date().getTime();
-//		while (n <= N) {
-//			datagramSocket.send(packet);
-//			System.out.println("Sended package with the number:" + n);
-//			
-//			if(n % 150 == 0) {
-//				Thread.sleep(100);
-//				System.out.println("verzögert");
-//			}
-//			n++;
-//		}
-//		endtime = new Date().getTime();
-//		calculate(starttime, endtime);
-//		datagramSocket.close();
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} catch (InterruptedException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		System.out.println("//*****UDP_END*****//");
+		System.out.println("//******UDP*****//");
+		try(DatagramSocket datagramSocket = new DatagramSocket();) {
+		DatagramPacket packet = new DatagramPacket(
+		        BUFFER, BUFFER.length, receiverAddress, PORT);
+		int n = 1;
+		starttime = new Date().getTime();
+		while (n <= N) {
+			datagramSocket.send(packet);
+			System.out.println("Sended package with the number:" + n);
+			
+			if(n % 150 == 0) {
+				Thread.sleep(100);
+				System.out.println("verzögert");
+			}
+			n++;
+		}
+		endtime = new Date().getTime();
+		calculate(starttime, endtime);
+		datagramSocket.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("//*****UDP_END*****//");
 		
 		System.out.println("//******TCP*****//");
 		try(Socket socket = new Socket(receiverAddress, PORT)) {
