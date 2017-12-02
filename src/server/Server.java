@@ -13,7 +13,7 @@ import java.util.Date;
 
 public class Server {
 	
-	private final static int PORT = 80;
+	private final static int PORT = 8080;
 	private final static int N = 100;
 	private final static byte[] BUFFER = new byte[1400];
 	
@@ -54,12 +54,16 @@ public class Server {
 		try(ServerSocket server = new ServerSocket(PORT)) {
 			Socket socket = server.accept();
 			DataInputStream dIn = new DataInputStream(socket.getInputStream());
-
-			int length = dIn.readInt();                    // read length of incoming message
-			if(length>0) {
-			    dIn.readFully(BUFFER, 0, BUFFER.length); // read the message
-			    System.out.println("got Package");
+			for(int n = 1; n <= N; n++) {
+				int length = dIn.readInt();                    // read length of incoming message
+				if(length>0) {
+				    dIn.readFully(BUFFER, 0, BUFFER.length); // read the message
+				    System.out.println("got Package" + n);
+				}
 			}
+			System.out.println("Connection closed");
+			socket.close();
+			server.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -11,7 +11,7 @@ import java.util.Date;
 
 public class Client {
 	
-	private final static int PORT = 80;
+	private final static int PORT = 8080;
 	private final static int N = 100;
 	private final static byte[] BUFFER = new byte[1400];
 	
@@ -50,8 +50,13 @@ public class Client {
 //			e.printStackTrace();
 //		}
 		
+		try {
+			receiverAddress = InetAddress.getByName("192.168.2.179");
+		} catch (UnknownHostException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		try(Socket socket = new Socket(receiverAddress, PORT)) {
-			receiverAddress = InetAddress.getByName("localhost");
 			DataOutputStream dOut = new DataOutputStream(socket.getOutputStream());
 			int n = 1;
 			long starttime = new Date().getTime();
