@@ -14,7 +14,7 @@ import java.util.Date;
 public class Server {
 	
 	private final static int PORT = 8080;
-	private final static int N = 1055;
+	private final static int N = 2055;
 	private final static byte[] BUFFER = new byte[1400];
 	private static long starttime;
 	private static long endtime;
@@ -42,6 +42,7 @@ public class Server {
 		}
 		long endtime = new Date().getTime();
 		calculate(starttime, endtime);
+		datagramSocket.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -58,7 +59,7 @@ public class Server {
 		
 		try(ServerSocket server = new ServerSocket(PORT)) {
 			Socket socket = server.accept();
-			socket.connect(socket.getRemoteSocketAddress(), 1000);
+////			socket.connect(socket.getRemoteSocketAddress(), 1000);
 			DataInputStream dIn = new DataInputStream(socket.getInputStream());
 			starttime = new Date().getTime();
 			for(int n = 1; n <= N; n++) {
