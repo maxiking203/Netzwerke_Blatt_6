@@ -12,7 +12,7 @@ import java.util.Date;
 public class Client {
 	
 	private final static int PORT = 8080;
-	private final static int N = 105;
+	private final static int N = 1055;
 	private final static byte[] BUFFER = new byte[1400];
 	private static InetAddress receiverAddress;
 	private static long starttime;

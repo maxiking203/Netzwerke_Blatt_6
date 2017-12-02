@@ -14,7 +14,7 @@ import java.util.Date;
 public class Server {
 	
 	private final static int PORT = 8080;
-	private final static int N = 105;
+	private final static int N = 1055;
 	private final static byte[] BUFFER = new byte[1400];
 	private static long starttime;
 	private static long endtime;
