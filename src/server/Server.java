@@ -14,46 +14,52 @@ import java.util.Date;
 public class Server {
 	
 	private final static int PORT = 8080;
-	private final static int N = 100;
+	private final static int N = 105;
 	private final static byte[] BUFFER = new byte[1400];
+	private static long starttime;
+	private static long endtime;
 	
 	@SuppressWarnings("resource")
 	public static void main(String[] args) {
+		System.out.println("//******UDP*****//");
 		int packageC = 0;
 		int failuers = 0;
-		long starttime = new Date().getTime();
-//		try (DatagramSocket datagramSocket = new DatagramSocket(PORT);) {
-//			datagramSocket.setSoTimeout(5000);
-//			DatagramPacket packet = new DatagramPacket(BUFFER, BUFFER.length);
-//
-//			for(int n = 1; n <= N; n++) {
-//			try {
-//			datagramSocket.receive(packet);
-//			packageC++;
-//			System.out.println("got package:" + packageC);
-//			}
-//            catch (SocketTimeoutException e) {
-//                // timeout exception.
-//                System.out.println("Timeout reached!!! " + e);
-//                failuers++;
-//                
-//            }
-//		}
-//		long endtime = new Date().getTime();
-//		calculate(starttime, endtime);
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		
-//		}
-//		System.out.println("revieved: " + packageC);
-//		System.out.println("missed: " + failuers);
+		try (DatagramSocket datagramSocket = new DatagramSocket(PORT);) {
+			datagramSocket.setSoTimeout(5000);
+			DatagramPacket packet = new DatagramPacket(BUFFER, BUFFER.length);
+			starttime = new Date().getTime();
+			for(int n = 1; n <= N; n++) {
+			try {
+			datagramSocket.receive(packet);
+			packageC++;
+			System.out.println("got package:" + packageC);
+			}
+            catch (SocketTimeoutException e) {
+                // timeout exception.
+                System.out.println("Timeout reached!!! " + e);
+                failuers++;          
+            }
+		}
+		long endtime = new Date().getTime();
+		calculate(starttime, endtime);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		
-		////////////
+		}
+		System.out.println("revieved: " + packageC);
+		System.out.println("missed: " + failuers);
+		
+		System.out.println("//*****UDP_END*****//");
+		
+		////TCP////
+		
+		System.out.println("//******TCP*****//");
 		
 		try(ServerSocket server = new ServerSocket(PORT)) {
 			Socket socket = server.accept();
 			DataInputStream dIn = new DataInputStream(socket.getInputStream());
+			starttime = new Date().getTime();
 			for(int n = 1; n <= N; n++) {
 				int length = dIn.readInt();                    // read length of incoming message
 				if(length>0) {
@@ -61,6 +67,8 @@ public class Server {
 				    System.out.println("got Package" + n);
 				}
 			}
+			endtime = new Date().getTime();
+			calculate(starttime, endtime);
 			System.out.println("Connection closed");
 			socket.close();
 			server.close();
@@ -68,6 +76,7 @@ public class Server {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		System.out.println("//*****TCP_END*****//");
 	}
 	
 	private static void calculate(long start, long end) {

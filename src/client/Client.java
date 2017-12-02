@@ -12,54 +12,55 @@ import java.util.Date;
 public class Client {
 	
 	private final static int PORT = 8080;
-	private final static int N = 100;
+	private final static int N = 105;
 	private final static byte[] BUFFER = new byte[1400];
+	private static InetAddress receiverAddress;
+	private static long starttime;
+	private static long endtime;
 	
 	public static void main(String[] args) {
-		InetAddress receiverAddress = null;
-//		try {
-//			receiverAddress = InetAddress.getByName("87.159.59.105");
-//		} catch (UnknownHostException e1) {
-//			System.out.println("Wrong Host!");
-//			e1.printStackTrace();
-//		}
-//		
-//		try(DatagramSocket datagramSocket = new DatagramSocket();) {
-//
-//		DatagramPacket packet = new DatagramPacket(
-//		        BUFFER, BUFFER.length, receiverAddress, PORT);
-//		int n = 1;
-//		long starttime = new Date().getTime();
-//		while (n <= N) {
-//			datagramSocket.send(packet);
-//			System.out.println("Sended package with the number:" + n);
-//			
-//			if(n % 10 == 0) {
-//				Thread.sleep(500);
-//				System.out.println("verzögert");
-//			}
-//			n++;
-//		}
-//		long endtime = new Date().getTime();
-//		calculate(starttime, endtime);
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} catch (InterruptedException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+		
 		
 		try {
 			receiverAddress = InetAddress.getByName("192.168.2.179");
+			System.out.println("SERVER IP SET");
 		} catch (UnknownHostException e1) {
-			// TODO Auto-generated catch block
+			System.out.println("Wrong Host!");
 			e1.printStackTrace();
 		}
+		
+		System.out.println("//******UDP*****//");
+		try(DatagramSocket datagramSocket = new DatagramSocket();) {
+		DatagramPacket packet = new DatagramPacket(
+		        BUFFER, BUFFER.length, receiverAddress, PORT);
+		int n = 1;
+		starttime = new Date().getTime();
+		while (n <= N) {
+			datagramSocket.send(packet);
+			System.out.println("Sended package with the number:" + n);
+			
+			if(n % 10 == 0) {
+				Thread.sleep(500);
+				System.out.println("verzögert");
+			}
+			n++;
+		}
+		endtime = new Date().getTime();
+		calculate(starttime, endtime);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("//*****UDP_END*****//");
+		
+		System.out.println("//******TCP*****//");
 		try(Socket socket = new Socket(receiverAddress, PORT)) {
 			DataOutputStream dOut = new DataOutputStream(socket.getOutputStream());
 			int n = 1;
-			long starttime = new Date().getTime();
+			starttime = new Date().getTime();
 			while (n <= N) {
 				dOut.writeInt(BUFFER.length);
 				dOut.write(BUFFER); 
@@ -71,6 +72,8 @@ public class Client {
 				}
 				n++;
 			}
+			endtime = new Date().getTime();
+			calculate(starttime, endtime);
 		} catch (IOException e) {
 			System.out.println("Connection failed or lost");
 			e.printStackTrace();
@@ -78,6 +81,7 @@ public class Client {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		System.out.println("//*****TCP_END*****//");
 				
 				
 
