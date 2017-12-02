@@ -58,13 +58,19 @@ public class Server {
 		
 		try(ServerSocket server = new ServerSocket(PORT)) {
 			Socket socket = server.accept();
+			socket.connect(socket.getRemoteSocketAddress(), 1000);
 			DataInputStream dIn = new DataInputStream(socket.getInputStream());
 			starttime = new Date().getTime();
 			for(int n = 1; n <= N; n++) {
+				try {
 				int length = dIn.readInt();                    // read length of incoming message
 				if(length>0) {
 				    dIn.readFully(BUFFER, 0, BUFFER.length); // read the message
-				    System.out.println("got Package" + n);
+				    System.out.println("got Package " + n);
+				}
+				}
+				catch(SocketTimeoutException s) {
+	                System.out.println("Timeout reached!!! " + s);
 				}
 			}
 			endtime = new Date().getTime();
