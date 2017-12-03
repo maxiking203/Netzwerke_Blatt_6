@@ -113,7 +113,9 @@ public class Client {
 	}
 	
 	private static void calculate(long start, long end , int amount) {
-		long rate = (((1400*amount)*8)/1000)/((end - start)/1000);
+		float time = end - start;
+		time = time/1000;
+		float rate = (((1400*amount)*8)/1000)/time;
 		System.out.println("Empfangsrate: " + rate + " kbit/s");
 	}
 }
