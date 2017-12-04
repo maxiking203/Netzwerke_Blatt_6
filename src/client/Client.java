@@ -116,6 +116,6 @@ public class Client {
 		float time = end - start;
 		time = time/1000;
 		float rate = (((1400*amount)*8)/1000)/time;
-		System.out.println("Empfangsrate: " + rate + " kbit/s");
+		System.out.println("Senderate: " + rate + " kbit/s");
 	}
 }
